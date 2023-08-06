@@ -193,8 +193,12 @@ module.exports = function(crowi, app) {
       // when redirect
       if (status === 302) {
         // extract page id on HackMD
+        logger.warn(`headers.location: ${headers.location}`);
+        logger.warn(`hackmdUri: ${hackmdUri}`);
         const pathnameOnHackmd = new URL(headers.location, hackmdUri).pathname; // e.g. '/NC7bSRraT1CQO1TO7wjCPw'
+        logger.warn(`pathnameOnHackmd: ${pathnameOnHackmd}`);
         const pageIdOnHackmd = /.*\/(\w+)$/.exec(pathnameOnHackmd)[1];
+        logger.warn(`pageIdOnHackmd: ${pageIdOnHackmd}`);
 
         page = await Page.registerHackmdPage(page, pageIdOnHackmd);
       }
